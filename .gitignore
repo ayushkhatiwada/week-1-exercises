@@ -1,1 +1,11 @@
-build/
+# Ignore everything
+*
+
+# Except these file types and directories
+!*.cpp
+!*.h
+!*.md
+!.gitignore
+!.git*/
+!.devcontainer/
+!README.md
