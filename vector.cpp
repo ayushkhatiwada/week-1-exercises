@@ -46,6 +46,21 @@ std::vector<int> create_fibonacci_vector(const int n) {
     return fibonacci_vector;
 }
 
+std::vector<int> create_fibonacci_vector2(const int n) {
+    if (n <= 0) throw std::invalid_argument("n must be a positive integer");
+    if (n == 1) return std::vector<int> {0};
+    if (n == 2) return std::vector<int> {0, 1};
+
+    std::vector<int> result(n);
+    result[0] = 0; 
+    result[1] = 1;
+
+    for (int i = 2; i < n; i++) {
+        result[i] = result[i - 1] + result[i - 2];
+    }
+    return result;
+}
+
 
 template<typename T, typename U>
 std::vector<T> scale_vector(const std::vector<T>& vector, const U& scalar) {
@@ -63,14 +78,15 @@ auto scale_vector2(const std::vector<T>& v, const U& scalar)
     -> std::vector<decltype(T{} * scalar)>
 {
     using R = decltype(T{} * scalar);
-    std::vector<R> result;
-    result.reserve(v.size());
+    std::vector<R> result(v.size());
 
-    for (const T& element : v)
-        result.push_back(scalar * element);
+    for (std::size_t i = 0; i < v.size(); ++i) {
+        result[i] = scalar * v[i];
+    }
 
     return result;
 }
+
 
 
 // Vectors of the same type
